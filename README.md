@@ -14,7 +14,7 @@ wget https://github.com/gl-inet/mv1000-ubuntu-image/raw/master/ubuntu-mv1000-3.0
 ubuntu_upgrade /tmp/ubuntu-mv1000-3.027-0916.tar.gz
 ```
 
-[MV1000 Ubuntu install](MV1000 ubuntu install.jpg)
+![MV1000 Ubuntu install](MV1000 ubuntu install.jpg)
 
 After installation, you must switch OS between Ubuntu and openwrt manually.
 
