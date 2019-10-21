@@ -20,7 +20,7 @@ sudo bash basic-install.sh
 ```
 ![Pi Hole Installation](pi-hole_installation.jpg)
 
-Follow the prompts to select the proper option.
+Follow the prompts to select the proper options. Please remember your password of Pi-Hole which is generated automatically. 
 
 ![Pi Hole Installation](pi-hole_installation2.jpg)
 
