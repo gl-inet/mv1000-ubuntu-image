@@ -1,4 +1,4 @@
-#Installing Pi-hole on MV1000
+# Installing Pi-hole on MV1000
 
 You have to switch to Ubuntu system on Ubuntu. You need to install necessary tools if you haven't.
 
