@@ -22,7 +22,7 @@ sudo bash basic-install.sh
 
 Follow the prompts to select the proper option.
 
-![Pi Hole Installation](pi-hole_installation1.jpg)
+![Pi Hole Installation](pi-hole_installation2.jpg)
 
 After installation, you will be able to access the Web Admin Panel of Pi-Hole.
 
