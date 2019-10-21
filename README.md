@@ -8,13 +8,13 @@ You can download the ubuntu image using your browser. Then upload to the router 
 You can also ssh to the router's openwrt system and download directly.
 
 In mv1000 openwrt shell:
-```
+```bash
 cd /tmp
 wget https://github.com/gl-inet/mv1000-ubuntu-image/raw/master/ubuntu-mv1000-3.027-0916.tar.gz
 ubuntu_upgrade /tmp/ubuntu-mv1000-3.027-0916.tar.gz
 ```
 
-![MV1000 Ubuntu install](MV1000 ubuntu install.jpg)
+![MV1000 Ubuntu install](mv1000_ubuntu_install.jpg)
 
 After installation, you must switch OS between Ubuntu and openwrt manually.
 
