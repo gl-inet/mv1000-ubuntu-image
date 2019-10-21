@@ -1,15 +1,20 @@
-# Install prebuilt Ubuntu
+# Install prebuilt Ubuntu on MV1000
 
-Currently Ubuntu installation is only supported by openwrt shell, not supported by openwrt webUI or uboot webUI.
+Currently Ubuntu installation is only supported by openwrt shell. You cannot install using openwrt webUI or uboot webUI.
 
-Upload Ubuntu image ubuntu.tar.gz to openwrt /tmp directory with scp, usb storage, wget or any other way you like.
+
+You can download the ubuntu image using your browser. Then upload to the router (openwrt) /tmp folder using scp, or winscp.
+
+You can also ssh to the router's openwrt system and download directly.
 
 In mv1000 openwrt shell:
 ```
-ubuntu_upgrade /tmp/ubuntu.tar.gz
+cd /tmp
+wget https://github.com/gl-inet/mv1000-ubuntu-image/raw/master/ubuntu-mv1000-3.027-0916.tar.gz
+ubuntu_upgrade /tmp/ubuntu-mv1000-3.027-0916.tar.gz
 ```
 
-Switch OS between Ubuntu and openwrt:
+After installation, you must switch OS between Ubuntu and openwrt manually.
 
 Openwrt switch to Ubuntu, in mv1000 openwrt shell:
 ```
