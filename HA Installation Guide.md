@@ -1,4 +1,4 @@
-#Home Assistant Installation Guidance
+#Home Assistant Installation Guide
 
 Installation Procedure
 
