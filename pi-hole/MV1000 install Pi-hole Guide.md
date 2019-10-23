@@ -24,7 +24,7 @@ The Pi-hole[®](https://pi-hole.net/trademark-rules-and-brand-guidelines/) is a 
 
 1. Download pi-hole source and install
 ```
-git clone -–depth 1 <https://github.com/pi-hole/pi-hole.git> pi-hole
+git clone --depth 1 https://github.com/pi-hole/pi-hole.git pi-hole
 cd pi-hole/automated install/
 sudo bash basic-install.sh
 ```
