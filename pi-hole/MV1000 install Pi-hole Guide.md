@@ -12,25 +12,22 @@ The Pi-hole[®](https://pi-hole.net/trademark-rules-and-brand-guidelines/) is a 
    the router tmp directory.
 
 2. You need the ssh router to upgrade to the ubuntu system with the following command:
-
+```
     ubuntu_upgrade -n /tmp/ubuntu.tar.gz 
-
     switch_system ubuntu
-
+```
 3. Install software soft package
-
+```
    sudo apt-get install git
-
+```
 ## Download Pi-hole Source and Installation Script
 
 1. Download pi-hole source and install
-
-​		git clone -–depth 1 <https://github.com/pi-hole/pi-hole.git> pi-hole
-
-​    	cd pi-hole/automated install/
-
-   	 sudo bash basic-install.sh
-
+```
+git clone -–depth 1 <https://github.com/pi-hole/pi-hole.git> pi-hole
+cd pi-hole/automated install/
+sudo bash basic-install.sh
+```
 ![1](images/1.png)
 
 ![2](images/2.png)
@@ -63,8 +60,7 @@ The Pi-hole[®](https://pi-hole.net/trademark-rules-and-brand-guidelines/) is a 
 
 ## Login Web Page
 
-After the installation is
-complete, enter http://192.168.8.1/admin or <http://192.168.7.141/admin(192.168.8.1 is the router LAN IP, 192.168.7.141 is the router WAN port IP) in the browser to open the login interface.
+After the installation completed, enter http://192.168.8.1/admin or <http://192.168.7.141/admin (192.168.8.1 is the router LAN IP, 192.168.7.141 is the router WAN port IP) in the browser to open the login interface.
 
 ![16](images/16.png)
 
@@ -76,8 +72,7 @@ Then you can log in to the pi-hole management page.
 
 ![17](images/17.png)
 
-On the page you can view the network information, you can
-configure the black and white list and dns, etc.
+On the page you can view the network information, you can configure the black and white list and dns, etc.
 
 ![18](images/18.png)
 
@@ -85,7 +80,7 @@ configure the black and white list and dns, etc.
 
 ![20](images/20.png)
 
-The background pihole configuration command can view the official documentation. <https://discourse.pi-hole.net/t/the-pihole-command-with-examples/738>
+The background Pi-Hole configuration command can view the official documentation. <https://discourse.pi-hole.net/t/the-pihole-command-with-examples/738>
 
 More configuration information to view <https://docs.pi-hole.net/main/projects/>
 
