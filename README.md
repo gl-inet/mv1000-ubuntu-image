@@ -1,3 +1,11 @@
+### Appliations of Ubuntu on MV1000 Brume
+
+You need to install Ubuntu as to the guide in this document first before you can use the following applications. 
+
+[Using **Home Assistant** on MV1000 Brume](https://github.com/gl-inet/mv1000-ubuntu-image/blob/master/HA%20Installation%20Guide.md)
+
+[Using **Pi Hole** on MV1000 Brume](https://github.com/gl-inet/mv1000-ubuntu-image/blob/master/pi-hole/MV1000%20install%20Pi-hole%20Guide.md)
+
 # Install prebuilt Ubuntu on MV1000
 
 Currently Ubuntu installation is only supported by openwrt shell. You cannot install using openwrt webUI or uboot webUI.
