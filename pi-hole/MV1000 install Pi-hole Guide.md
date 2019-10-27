@@ -13,19 +13,27 @@ The Pi-hole[®](https://pi-hole.net/trademark-rules-and-brand-guidelines/) is a 
 
 2. You need the ssh router to upgrade to the ubuntu system with the following command:
 ```
-    ubuntu_upgrade -n /tmp/ubuntu.tar.gz 
-    switch_system ubuntu
+ubuntu_upgrade -n /tmp/ubuntu.tar.gz 
+switch_system ubuntu
 ```
 3. Install software soft package
 ```
-   sudo apt-get install git
+sudo apt-get install git
 ```
+
+4. Disable dnsmasq dns server to solve conflict with pi-hole installation
+```
+cp /etc/dnsmasq.conf /etc/dnsmasq.conf.bak1
+echo "port=0" >>/etc/dnsmasq.conf
+systemctl restart dnsmasq
+```
+
 ## Download Pi-hole Source and Installation Script
 
 1. Download pi-hole source and install
 ```
 git clone --depth 1 https://github.com/pi-hole/pi-hole.git pi-hole
-cd pi-hole/automated install/
+cd pi-hole/automated\ install/
 sudo bash basic-install.sh
 ```
 ![1](images/1.png)
