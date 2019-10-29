@@ -66,6 +66,38 @@ sudo bash basic-install.sh
 
 ![15](images/15.png)
 
+## Enable dhcp server
+By default, MV1000 is set as a router for two LAN ports and one WAN port. **dnsmasq** is both a DNS server and a DHCP server, and it was turned off by previous automated installation of pi-hole.
+
+Now we need to start DHCP server for LAN clinets. Here's a dirty hack for enable DHCP server of **dnsmasq** without tackling on the origial **dnsmasq.service**.
+
+- Define a separate config file
+```
+cat <<EOF >/root/dnsmasq-dncp-server.conf
+interface=br-lan
+bind-interfaces
+dhcp-range=192.168.8.5,192.168.8.250,255.255.255.0,24h
+dhcp-option=option:router,192.168.8.1
+port=0
+dhcp-option=6,$(cat dhcpcd.conf  | grep ip_address | cut -f2 -d"=" | cut -f1 -d"/")
+EOF
+```
+You can see above we choose WAN as the working interface for DNS server. So we have "dhcp-option 6" for LAN client to use pi-hole as DNS server.
+
+
+- Let **dnsmasq** startup at rc.local
+```
+sed -i 's/^exit 0//' /etc/rc.local
+
+cat <<EOF >>/etc/rc.local
+while true; do
+	ip link show br-lan && dnsmasq -C /root/02-pihole-dnsmasq.conf && break
+	sleep 2
+done
+exit 0
+```
+
+
 ## Login Web Page
 
 After the installation completed, enter http://192.168.8.1/admin or <http://192.168.7.141/admin (192.168.8.1 is the router LAN IP, 192.168.7.141 is the router WAN port IP) in the browser to open the login interface.
