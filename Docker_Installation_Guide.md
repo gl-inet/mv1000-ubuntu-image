@@ -2,6 +2,7 @@
 1,Docker kernel configuration:
 
 General setup  --->
+
 	[*] POSIX Message Queues
 	-*- Control Group support  --->
 		[*]   Example debug cgroup subsystem
@@ -31,6 +32,7 @@ General setup  --->
 		[*]   Network namespace
 		
 -*- Enable the block layer  --->
+
 	[*]   Block layer bio throttling support
 	IO Schedulers  --->
 		<*> CFQ I/O scheduler
@@ -38,11 +40,13 @@ General setup  --->
 		
 		
 Kernel Features  --->
+
 	[*] Enable seccomp to safely compute untrusted bytecode
 
 
 		
 [*] Networking support  --->
+
 	Networking options  --->
 		<*> Transformation user configuration interface
 		<*>   IP: ESP transformation
@@ -83,6 +87,7 @@ Kernel Features  --->
 	
 		
 Device Drivers  --->
+
 	[*] Multiple devices driver support (RAID and LVM)  --->
 		<*>   Device mapper support
 		<*>     Thin provisioning target
@@ -101,6 +106,7 @@ Device Drivers  --->
 
 
 File systems  --->
+
 	<*> The Extended 3 (ext3) filesystem
 	[*]   Ext3 POSIX Access Control Lists
 	[*]   Ext3 Security Labels
@@ -115,6 +121,7 @@ File systems  --->
 
 		
 Security options  --->
+
 	-*- Enable access key retention support
 	[*]   Enable register of persistent per-UID keyrings
 	<*>   ENCRYPTED KEYS
@@ -122,9 +129,12 @@ Security options  --->
 	
 
 -*- Cryptographic API  --->
+
 	<*>   GCM/GMAC support
 	
 	
-2,Docker install:
+2，Docker install:
+
 curl -fsSL https://get.docker.com -o get-docker.sh
+
 bash get-docker.sh
