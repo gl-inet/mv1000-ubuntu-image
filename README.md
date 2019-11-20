@@ -46,7 +46,7 @@ You can also ssh to the router's openwrt system and download directly.
 In mv1000 openwrt shell:
 ```bash
 cd /tmp
-curl -SL https://github.com/gl-inet/mv1000-ubuntu-image/blob/master/ubuntu-18.04.3-20191109.tar.gz -o /tmp/ubuntu-18.04.3-20191109.tar.gz
+curl -SL https://github.com/gl-inet/mv1000-ubuntu-image/raw/master/ubuntu-18.04.3-20191109.tar.gz -o /tmp/ubuntu-18.04.3-20191109.tar.gz
 ubuntu_upgrade -n /tmp/ubuntu-18.04.3-20191109.tar.gz
 ```
 
