@@ -6,6 +6,8 @@ You need to install Ubuntu as to the guide in this document first before you can
 
 [Using **Pi Hole** on MV1000 Brume](https://github.com/gl-inet/mv1000-ubuntu-image/blob/master/pi-hole/MV1000%20install%20Pi-hole%20Guide.md)
 
+[Using **Adguide** on MV1000 Brume](https://github.com/gl-inet/mv1000-ubuntu-image/blob/master/adguard/MV1000%20Install%20AdGuardHome%20Guide.md)
+
 # Before Install prebuilt Ubuntu on MV1000
 
 `caution` **Installing prebuilt Ubuntu will erase eMMC's third partition, i.e. /data under openwrt mount point. So backup your data before install ubuntu.**
