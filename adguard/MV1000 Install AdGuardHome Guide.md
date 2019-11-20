@@ -3,8 +3,8 @@
 # Install Dependent Program
 
 ```
-sudo apt-get update
-sudo apt-get install nano bind9-host
+sudo apt update
+sudo apt install nano bind9-host
 ```
 
 
