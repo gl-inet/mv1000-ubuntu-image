@@ -64,6 +64,15 @@ Ubuntu switch to openwrt, in mv1000 Ubuntu shell:
 switch_system openwrt
 ```
 
+After you switch system and the router will reboot. Then you can ssh to ubuntu. The default IP is `192.168.8.1` and default root password is `goodlife`.
+
+The first task you need to do is the change the root password.
+```
+root@GL-MV1000-Ubuntu:~# passwd
+Enter new UNIX password:
+Retype new UNIX password:
+passwd: password updated successfully
+```
 
 # Create image based on prebuilt Ubuntu
 ## Example 1. Add pacakge and config
