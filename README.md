@@ -90,7 +90,7 @@ cd ~/mv1000-ubuntu/
 git clone https://github.com/gl-inet/mv1000-ubuntu-image.git ubuntu-rootfs
 cd ubuntu-rootfs
 mkdir rootfs
-sudo tar xf ubuntu-18.04.3-20191026.tar.gz -C rootfs
+sudo tar xf ubuntu-18.04.3-20191109.tar.gz -C rootfs
 ```
 After build kernel from source, refering to
 https://github.com/gl-inet/mv1000-ubuntu-kernel/blob/master/README.md
