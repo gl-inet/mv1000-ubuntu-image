@@ -6,6 +6,8 @@ The Pi-hole[®](https://pi-hole.net/trademark-rules-and-brand-guidelines/) is a 
 
 ## MV1000 install Ubuntu System and Environment Preparation
 
+Pls omit step 1 and 2 if you have installed Ubuntu.
+
 1. You can refer the documentation
    <https://docs.gl-inet.com/en/3/app/ssh/>,
    connect to the router with WinSCP, copy the ubuntu system file ubuntu.tar.gz to
