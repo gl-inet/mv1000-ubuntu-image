@@ -51,16 +51,16 @@ Finally click "Next" to complete the configuration.
 
 ![](assets/10.png)
 
-Then log in again to see the dashboard, you can see the number of DNS queries, the website that was filtered and intercepted, the client address for querying DNS requests, and so on.
+Then log in again to access the dashboard. You can see the number of DNS queries, the website that was filtered and intercepted, the client address for querying DNS requests etc.
+
+Pls go on and finish setting the DNS and DHCP options. 
 
 ![](assets/2.png)
-
 
 
 General settings
 
 ![](assets/4.png)
-
 
 
 DNS settings
