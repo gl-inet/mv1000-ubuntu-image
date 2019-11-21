@@ -66,6 +66,18 @@ switch_system openwrt
 
 After you switch system and the router will reboot. Then you can ssh to ubuntu. The default IP is `192.168.8.1` and default root password is `goodlife`.
 
+If your are in a terminal, ssh by
+```
+ssh root@192.168.8.1
+```
+Other tools like putty works too.
+
+When you get message like **"WARNING: REMOTE HOST IDENTIFICATIONHAS CHANGED!"**, you can use
+```
+ssh-keygen -R 192.168.8.1
+```
+to update public ssh key of 192.168.8.1 as known host.
+
 The first task you need to do is the change the root password.
 ```
 root@GL-MV1000-Ubuntu:~# passwd
