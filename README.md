@@ -34,6 +34,18 @@ reboot; \
 When uboot updated, the system will reboot. Or when it puts "No need to update uboot".
 You can go to the next step.
 
+# Note about reset button and U-boot web failsafe
+
+In case of Ubuntu installation failure, you can go back to oringal openwrt system.
+
+Push reset button and plug in power:
+- Release button when the middle led on, the U-boot web failsafe start.
+
+U-boot web failsafe is needed when your openwrt firmware crash,
+and can only be used to flash openwrt firmware, not ubuntu image.
+
+- Release button when side led on, uboot will choose openwrt as default system and reboot.
+
 # Install prebuilt Ubuntu on MV1000
 
 Currently Ubuntu installation is only supported by openwrt shell. You cannot install using openwrt webUI or uboot webUI.
