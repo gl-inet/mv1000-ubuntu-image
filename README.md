@@ -1,4 +1,4 @@
-### Appliations of Ubuntu on MV1000 Brume
+### Applications of Ubuntu on MV1000 Brume
 
 You need to install Ubuntu as to the guide in this document first before you can use the following applications. 
 
