@@ -75,13 +75,13 @@ Now we need to start DHCP server for LAN clinets. Here's a dirty hack for enable
 
 - Define a separate config file
 ```
-cat <<EOF >/root/dnsmasq-dncp-server.conf
+cat <<EOF >/root/dnsmasq-dhcp-server.conf
 interface=br-lan
 bind-interfaces
 dhcp-range=192.168.8.5,192.168.8.250,255.255.255.0,24h
 dhcp-option=option:router,192.168.8.1
 port=0
-dhcp-option=6,$(cat dhcpcd.conf  | grep ip_address | cut -f2 -d"=" | cut -f1 -d"/")
+dhcp-option=6,$(cat /etc/dhcpcd.conf  | grep ip_address | cut -f2 -d"=" | cut -f1 -d"/")
 EOF
 ```
 You can see above we choose WAN as the working interface for DNS server. So we have "dhcp-option 6" for LAN client to use pi-hole as DNS server.
@@ -93,9 +93,9 @@ sed -i 's/^exit 0//' /etc/rc.local
 
 cat <<EOF >>/etc/rc.local
 while true; do
-	ip link show br-lan && dnsmasq -C /root/02-pihole-dnsmasq.conf && break
+	ip link show br-lan && dnsmasq -C /root/dnsmasq-dhcp-server.conf && break
 	sleep 2
-done
+done &
 exit 0
 ```
 
