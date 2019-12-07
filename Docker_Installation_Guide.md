@@ -1,5 +1,5 @@
 
-1,Docker kernel configuration:
+Docker kernel configuration:
 
 General setup  --->
 
@@ -133,7 +133,7 @@ Security options  --->
 	<*>   GCM/GMAC support
 	
 	
-2，Docker install:
+Docker install on ubuntu with mv1000:
 
 curl -fsSL https://get.docker.com -o get-docker.sh
 
