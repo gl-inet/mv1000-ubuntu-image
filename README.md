@@ -36,9 +36,9 @@ You can go to the next step.
 
 # Note about reset button and U-boot web failsafe
 
-In case of Ubuntu installation failure, you can go back to oringal openwrt system.
+In case of Ubuntu installation failure, you can go back to original openwrt system.
 
-Push reset button and plug in power:
+Press reset button and plug in power:
 - Release button when the middle led on, the U-boot web failsafe start.
 
 U-boot web failsafe is needed when your openwrt firmware crash,
