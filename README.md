@@ -10,11 +10,11 @@ You need to install Ubuntu as to the guide in this document first before you can
 
 # Before Install prebuilt Ubuntu on MV1000
 
-`caution` **Installing prebuilt Ubuntu will erase eMMC's third partition, i.e. /data under openwrt mount point. So backup your data before install ubuntu.**
+`caution` **Installing prebuilt Ubuntu will erase eMMC's third partition, i.e. /data under OpenWrt mount point. So backup your data before install ubuntu.**
 
 You need to check and update uboot version before installing ubuntu
 
-Copy and paste the following script to run in openwrt shell:
+Copy and paste the following script to run in OpenWrt shell:
 ```
 uboot_need_update=0; \
 [ -n "$(strings /dev/mtd0 | grep "U-Boot 2" | grep dirty)" ] && uboot_need_update=1; \
@@ -34,28 +34,14 @@ reboot; \
 When uboot updated, the system will reboot. Or when it puts "No need to update uboot".
 You can go to the next step.
 
-# Note about reset button and U-boot web failsafe
-
-In case of Ubuntu installation failure, you can go back to original openwrt system.
-
-Press and hold the reset button, and plug in the power supply:
-- Release button when the middle led on, the U-boot web failsafe start.
-
-U-boot web failsafe is needed when your openwrt firmware crash,
-and can only be used to flash openwrt firmware, not ubuntu image.
-
-- Release button when side led on, uboot will choose openwrt as default system and reboot.
-
 # Install prebuilt Ubuntu on MV1000
 
-Currently Ubuntu installation is only supported by openwrt shell. You cannot install using openwrt webUI or uboot webUI.
+Currently, Ubuntu installation is only supported by OpenWrt shell. You cannot install using OpenWrt webUI or uboot webUI.
 
 
-You can download the ubuntu image using your browser. Then upload to the router (openwrt) /tmp folder using scp, or winscp.
+You can download the ubuntu image using your browser. Then upload to the router (OpenWrt) /tmp folder using scp, or winscp.
 
-You can also ssh to the router's openwrt system and download directly.
-
-In mv1000 openwrt shell:
+You can also ssh to the router's OpenWrt system and download it by command line, in mv1000 OpenWrt shell:
 ```bash
 cd /tmp
 curl -SL http://download.gl-inet.com/firmware/mv1000/ubuntu/testing/ubuntu-18.04.3-20191109.tar.gz -o /tmp/ubuntu-18.04.3-20191109.tar.gz
@@ -64,33 +50,33 @@ ubuntu_upgrade -n /tmp/ubuntu-18.04.3-20191109.tar.gz
 
 ![MV1000 Ubuntu install](mv1000_ubuntu_install.jpg)
 
-After installation, you must switch OS between Ubuntu and openwrt manually.
+After installation, you must switch OS between Ubuntu and OpenWrt manually.
 
-Openwrt switch to Ubuntu, in mv1000 openwrt shell:
+OpenWrt switch to Ubuntu, in mv1000 OpenWrt shell:
 ```
 switch_system ubuntu
 ```
 
-Ubuntu switch to openwrt, in mv1000 Ubuntu shell:
+Ubuntu switch to OpenWrt, in mv1000 Ubuntu shell:
 ```
-switch_system openwrt
+switch_system OpenWrt
 ```
 
-After you switch system and the router will reboot. Then you can ssh to ubuntu. The default IP is `192.168.8.1` and default root password is `goodlife`.
+After you switch system and the router will reboot. Then you can ssh to ubuntu. The default IP is `192.168.8.1` and the default root password is `goodlife`.
 
-If your are in a terminal, ssh by
+If you are in a terminal, ssh by
 ```
 ssh root@192.168.8.1
 ```
-Other tools like putty works too.
+Other tool like putty works too.
 
-When you get message like **"WARNING: REMOTE HOST IDENTIFICATIONHAS CHANGED!"**, you can use
+When you get a message like **"WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!"**, you can use
 ```
 ssh-keygen -R 192.168.8.1
 ```
-to update public ssh key of 192.168.8.1 as known host.
+to update the public ssh key of 192.168.8.1 as a known host.
 
-The first task you need to do is the change the root password.
+The first task you need to do is to change the root password.
 ```
 root@GL-MV1000-Ubuntu:~# passwd
 Enter new UNIX password:
@@ -98,15 +84,28 @@ Retype new UNIX password:
 passwd: password updated successfully
 ```
 
+# Note about reset button and U-boot web failsafe
+
+In case of Ubuntu installation failure, you can go back to the original OpenWrt system.
+
+Press and hold the reset button, and plug in the power supply:
+- Release button when the middle led on, the U-boot web failsafe start.
+
+U-boot web failsafe is needed when your OpenWrt firmware crash,
+and can only be used to flash OpenWrt firmware, not ubuntu image.
+
+- Release button when side led on, uboot will choose OpenWrt as default system and reboot.
+
+
 # Create image based on prebuilt Ubuntu
-## Example 1. Add pacakge and config
-- Install preuilt image and login into Ubuntu
+## Example 1. Add package and config
+- Install prebuilt image and login into Ubuntu
 - Make changes: apt-get install and other configuration
-- Switch to openwrt in mv1000 Ubuntu shell:
+- Switch to OpenWrt in mv1000 Ubuntu shell:
 ```
-switch_system openwrt
+switch_system OpenWrt
 ```
-- By default the ubuntu filesystem is mounted on /data,
+- By default, the ubuntu filesystem is mounted on /data,
   Archive the whole filesystem of ubuntu, in mv1000 opnewrt shell:
 ```
 cd /data
@@ -125,7 +124,7 @@ cd ubuntu-rootfs
 mkdir rootfs
 sudo tar xf ubuntu-18.04.3-20191109.tar.gz -C rootfs
 ```
-After build kernel from source, refering to
+After build kernel from source, referring to
 https://github.com/gl-inet/mv1000-ubuntu-kernel/blob/master/README.md
 
 **clean old modules by rm -fr with caution**
@@ -198,7 +197,7 @@ depmod
 
 ## Method 2 - cross compile
 *When compiling kernel module, gcc version should be consistent with version to compile kernel image.
-Current available ubuntu kernel image is compile by gcc5, so local compiling will not work for ubuntu 18.04 with default gcc7*
+Current available ubuntu kernel image is compiled by gcc5, so local compiling will not work for ubuntu 18.04 with default gcc7*
 
 Original reference:
 
