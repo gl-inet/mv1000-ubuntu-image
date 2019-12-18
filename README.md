@@ -59,7 +59,7 @@ switch_system ubuntu
 
 Ubuntu switch to OpenWrt, in mv1000 Ubuntu shell:
 ```
-switch_system OpenWrt
+switch_system openwrt
 ```
 
 After you switch system and the router will reboot. Then you can ssh to ubuntu. The default IP is `192.168.8.1` and the default root password is `goodlife`.
@@ -103,7 +103,7 @@ and can only be used to flash OpenWrt firmware, not ubuntu image.
 - Make changes: apt-get install and other configuration
 - Switch to OpenWrt in mv1000 Ubuntu shell:
 ```
-switch_system OpenWrt
+switch_system openwrt
 ```
 - By default, the ubuntu filesystem is mounted on /data,
   Archive the whole filesystem of ubuntu, in mv1000 opnewrt shell:
