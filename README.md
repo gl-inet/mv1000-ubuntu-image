@@ -8,7 +8,7 @@ You need to install Ubuntu as to the guide in this document first before you can
 
 [Using **Adguard** on MV1000 Brume](https://github.com/gl-inet/mv1000-ubuntu-image/blob/master/adguard/MV1000%20Install%20AdGuardHome%20Guide.md)
 
-[Using **Docker** on MV1000 Brume](https://github.com/gl-inet/mv1000-ubuntu-image/blob/master/master/Docker%20Installation%20Guide.md)
+[Using **Docker** on MV1000 Brume](https://github.com/gl-inet/mv1000-ubuntu-image/blob/master/Docker%20Installation%20Guide.md)
 
 # Before Install prebuilt Ubuntu on MV1000
 
