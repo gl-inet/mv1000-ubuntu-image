@@ -46,8 +46,8 @@ You can download the ubuntu image using your browser. Then upload to the router 
 You can also ssh to the router's OpenWrt system and download it by command line, in mv1000 OpenWrt shell:
 ```bash
 cd /tmp
-curl -SL http://download.gl-inet.com/firmware/mv1000/ubuntu/testing/ubuntu-18.04.3-20191109.tar.gz -o /tmp/ubuntu-18.04.3-20191109.tar.gz
-ubuntu_upgrade -n /tmp/ubuntu-18.04.3-20191109.tar.gz
+curl -SL http://download.gl-inet.com/firmware/mv1000/ubuntu/testing/ubuntu-18.04.3-20200109.tar.gz -o /tmp/ubuntu-18.04.3-20200109.tar.gz
+ubuntu_upgrade -n /tmp/ubuntu-18.04.3-20200109.tar.gz
 ```
 
 ![MV1000 Ubuntu install](mv1000_ubuntu_install.jpg)
@@ -124,7 +124,7 @@ cd ~/mv1000-ubuntu/
 git clone https://github.com/gl-inet/mv1000-ubuntu-image.git ubuntu-rootfs
 cd ubuntu-rootfs
 mkdir rootfs
-sudo tar xf ubuntu-18.04.3-20191109.tar.gz -C rootfs
+sudo tar xf ubuntu-18.04.3-20200109.tar.gz -C rootfs
 ```
 After build kernel from source, referring to
 https://github.com/gl-inet/mv1000-ubuntu-kernel/blob/master/README.md
