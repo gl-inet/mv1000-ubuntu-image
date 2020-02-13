@@ -12,7 +12,7 @@ You need to install Ubuntu as to the guide in this document first before you can
 
 # Before Install prebuilt Ubuntu on MV1000
 
-`caution` **Installing prebuilt Ubuntu will erase eMMC's third partition, i.e. /data under OpenWrt mount point. So backup your data before install ubuntu.**
+`caution` **Installing prebuilt Ubuntu will erase eMMC's third partition, i.e. /data under OpenWrt mount point. So backup your data before install ubuntu. You can use samba or scp to backup. **
 
 You need to check and update uboot version before installing ubuntu
 
@@ -46,11 +46,13 @@ You can download the ubuntu image using your browser. Then upload to the router 
 You can also ssh to the router's OpenWrt system and download it by command line, in mv1000 OpenWrt shell:
 ```bash
 cd /tmp
-curl -SL http://download.gl-inet.com/firmware/mv1000/ubuntu/testing/ubuntu-18.04.3-20200109.tar.gz -o /tmp/ubuntu-18.04.3-20200109.tar.gz
-ubuntu_upgrade -n /tmp/ubuntu-18.04.3-20200109.tar.gz
+curl -SL http://download.gl-inet.com/firmware/mv1000/ubuntu/testing/ubuntu-18.04.3-20200109.tar.gz -o /tmp/ubuntu.tar.gz
+ubuntu_upgrade -n /tmp/ubuntu.tar.gz
 ```
 
 ![MV1000 Ubuntu install](mv1000_ubuntu_install.jpg)
+
+In the case of "ubuntu_upgrade command not found", you should upgrade factory OpenWrt firmware firstly.
 
 After installation, you must switch OS between Ubuntu and OpenWrt manually.
 
@@ -70,7 +72,7 @@ If you are in a terminal, ssh by
 ```
 ssh root@192.168.8.1
 ```
-Other tool like putty works too.
+Other tools like putty work too.
 
 When you get a message like **"WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!"**, you can use
 ```
@@ -88,7 +90,7 @@ passwd: password updated successfully
 
 # Note about reset button and U-boot web failsafe
 
-In case of Ubuntu installation failure, you can go back to the original OpenWrt system.
+In the case of Ubuntu installation failure, you can go back to the original OpenWrt system.
 
 Press and hold the reset button, and plug in the power supply:
 - Release button when the middle led on, the U-boot web failsafe start.
@@ -101,14 +103,14 @@ and can only be used to flash OpenWrt firmware, not ubuntu image.
 
 # Create image based on prebuilt Ubuntu
 ## Example 1. Add package and config
-- Install prebuilt image and login into Ubuntu
+- Install the prebuilt image and login into Ubuntu
 - Make changes: apt-get install and other configuration
 - Switch to OpenWrt in mv1000 Ubuntu shell:
 ```
 switch_system openwrt
 ```
 - By default, the ubuntu filesystem is mounted on /data,
-  Archive the whole filesystem of ubuntu, in mv1000 opnewrt shell:
+  Archive the whole filesystem of ubuntu, in mv1000 OpenWrt shell:
 ```
 cd /data
 tar czf /tmp/ubuntu.tar.gz *
@@ -126,7 +128,7 @@ cd ubuntu-rootfs
 mkdir rootfs
 sudo tar xf ubuntu-18.04.3-20200109.tar.gz -C rootfs
 ```
-After build kernel from source, referring to
+To build kernel from source, refer to
 https://github.com/gl-inet/mv1000-ubuntu-kernel/blob/master/README.md
 
 **clean old modules by rm -fr with caution**
@@ -158,15 +160,16 @@ Then download the newly made ubuntu.tar.gz image.
 
 # Kernel module package installation example - wireguard
 
-## Method 1 - local compile
-All following command is in Ubuntu shell.
+## Part 1 - userspace tool
+**Following commands should be issued in MV1000 Ubuntu shell.**
 
-Optional change package source list.
+Optionally change package source list.
 ```
 cp /etc/apt/sources.list /etc/apt/sources.list.backup
 sed -i 's|http://ports.ubuntu.com/ubuntu-ports/|http://mirrors.aliyun.com/ubuntu-ports/|g' /etc/apt/sources.list
 ```
 
+Install wiregurd (partially)
 ```
 apt-get update
 apt-get install software-properties-common
@@ -174,32 +177,48 @@ add-apt-repository ppa:wireguard/wireguard
 apt-get update
 apt-get install wireguard
 ```
-Wireguard kernel module will fail to build for non-standard ubuntu kernel, workaround is to build kernel module from source.
+Wireguard kernel module will fail to build for non-standard ubuntu kernel, the workaround is to build kernel module from source.
 
-Prepare build environment:
+And the kernel image, i.e. boot/Image is compiled by cross compiler that's with the feature "CC_HAS_ASM_GOTO" on, if you compile kernel module by MV1000 ubuntu local gcc, while it has "CC_HAS_ASM_GOTO" off, this will cause module incompatible and crash, so we have build wiregurad kernel module by cross compiler.
+
+## Part 2 - kernel module cross compile.
+
+**Following commands should be issued in host PC shell.**
+
+Prepare the build environment:
 ```
 apt-get install libmnl-dev libelf-dev build-essential pkg-config bc git
 ```
 Get kernel source tree:
 ```
-cd /usr/src
+cd ~/mv1000-ubuntu/
 git clone https://github.com/gl-inet/mv1000-ubuntu-kernel.git ubuntu-kernel
 ```
-Get your running kernel's .config and generated header etc if you build your own kernel.
+
+Transfer a copy of wireguard source code into directory say ~/mv1000-ubuntu/wireguard-0.0.20190913.
+
+Get running kernel's .config and generated header etc.
 ```
-tar xf /usr/src/compile_generated.tar -C /usr/src/ubuntu-kernel
-cd /usr/src/ubuntu-kernel
-make oldconfig
-make modules_prepare
-make -C /usr/src/ubuntu-kernel M=/usr/src/wireguard-0.0.20190913 clean
-make -C /usr/src/ubuntu-kernel M=/usr/src/wireguard-0.0.20190913
-make -C /usr/src/ubuntu-kernel M=/usr/src/wireguard-0.0.20190913 modules_install
-depmod
+curl -SL https://github.com/gl-inet/mv1000-ubuntu-image/raw/master/compile_generated-18.04.3-20200109.tar -o ~/mv1000-ubuntu/compile_generated.tar
+tar xf ~/mv1000-ubuntu/compile_generated.tar -C ~/mv1000-ubuntu/ubuntu-kernel
 ```
 
-## Method 2 - cross compile
-*When compiling kernel module, gcc version should be consistent with version to compile kernel image.
-Current available ubuntu kernel image is compiled by gcc5, so local compiling will not work for ubuntu 18.04 with default gcc7*
+Compile
+```
+cd ~/mv1000-ubuntu/ubuntu-kernel
+export ARCH=arm64
+export CROSS_COMPILE=aarch64-linux-gnu-
+make oldconfig
+make modules_prepare
+make -C ~/mv1000-ubuntu/ubuntu-kernel M=~/mv1000-ubuntu/wireguard-0.0.20190913 clean
+make -C ~/mv1000-ubuntu/ubuntu-kernel M=~/mv1000-ubuntu/wireguard-0.0.20190913
+make -C ~/mv1000-ubuntu/ubuntu-kernel M=~/mv1000-ubuntu/wireguard-0.0.20190913 modules_install INSTALL_MOD_PATH=~/mv1000-ubuntu/module_inst_dir
+```
+The copy compiled .ko under module_inst_dir to mv1000 ubuntu /lib/module/ directory
+and run
+```
+depmod
+```
 
 Original reference:
 
