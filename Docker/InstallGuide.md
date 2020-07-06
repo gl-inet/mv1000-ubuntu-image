@@ -1,90 +1,35 @@
 # Docker Installation Guide
 
-## Before Install Docker on Ubuntu of MV1000
+## Check the Ubuntu firmware version before proceeding
 
-### Check firmware date compiled before installing Docker
+If you have already installed Ubuntu before, run the following command:
 
-If your MV1000 is runing **openwrt system** and it's already installed **ubuntu**.Please use the following instructions to check the firmware compilation date:
-
-```
-root@GL-MV1000:/# cat /data/etc/version.date 
-2020-1-9 10:25:18
+```sh
+cat /data/etc/version.date
 ```
 
-If your MV1000 is runing **ubuntu system**.Please use the following instructions to check the firmware compilation date:
-
-```
-root@GL-MV1000-Ubuntu:~# cat /etc/version.date 
-2020-1-9 10:25:18
-```
-
-### Upgrade ubuntu firmware
-
-**Caution:**
-
-   	**If the firmware date is 2020-1-9 10:25:18 and later, skip the firmware upgrade.Otherwise, follow the steps below to upgrade the ubuntu system**.
-
-If your MV1000 is runing ubuntu system.Please run **'switch_system openwrt'** to switch to openwrt system. 
-
-1.switch to openwrt system
-
-	switch_system openwrt
-
-2.download ubuntu firmware
-
-```
-curl -SL http://download.gl-inet.com/firmware/mv1000/ubuntu/testing/ubuntu-18.04.3-20200109.tar.gz -o /tmp/ubuntu-18.04.3-20200109.tar.gz
-
-```
-
-3.upgrade 
-
-```
-ubuntu_upgrade -n /tmp/ubuntu-18.04.3-20200109.tar.gz
-```
-
-4.switch to ubuntu system
-
-```
-switch_system ubuntu
-```
-
-
+⚠️ The Ubuntu firmware version must be **2020-1-9 10:25:18 or newer** before you continue. If not, please go back to the Ubuntu install guide and start from scratch. ⚠️
 
 ## Install docker
 
-### Install the curl tool as shown below
+**1.** Install dependencies:
 
-```
-sudo apt-get update
-sudo apt-get install curl
+```sh
+apt update && apt upgrade -y
+apt install -y curl
 ```
 
-### Download docker script and execute
+**2.** Download an run the docker setup script:
 
-```
+```sh
 curl -fsSL https://get.docker.com -o get-docker.sh
-bash get-docker.sh
+chmod a+x get-docker.sh
+./get-docker.sh
 ```
 
-### Check if the installation was successful
+**3.** If the installation was successful, you will see an output similar to the one bellow:
 
-After executing the docker installation script, the following information will be output
-
-```
-root@GL-MV1000-Ubuntu:~# bash get-docker.sh 
-
-# Executing docker install script, commit: f45d7c11389849ff46a6b4d94e0dd1ffebca32c1
-
-- sh -c 'apt-get update -qq >/dev/null'
-- sh -c 'DEBIAN_FRONTEND=noninteractive apt-get install -y -qq apt-transport-https ca-certificates curl gnupg >/dev/null'
-- sh -c 'curl -fsSL "https://download.docker.com/linux/ubuntu/gpg" | apt-key add -qq - >/dev/null'
-  Warning: apt-key output should not be parsed (stdout is not a terminal)
-  curl: (35) OpenSSL SSL_connect: SSL_ERROR_SYSCALL in connection to download.docker.com:443 
-  gpg: no valid OpenPGP data found.
-  root@GL-MV1000-Ubuntu:~# 
-  root@GL-MV1000-Ubuntu:~# bash get-docker.sh 
-
+```sh
 # Executing docker install script, commit: f45d7c11389849ff46a6b4d94e0dd1ffebca32c1
 
 - sh -c 'apt-get update -qq >/dev/null'
@@ -142,4 +87,3 @@ WARNING: Adding a user to the "docker" group will grant the ability to run
          Refer to https://docs.docker.com/engine/security/security/#docker-daemon-attack-surface
          for more information.
 ```
-
